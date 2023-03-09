@@ -23,21 +23,22 @@ export default function CanvasContainer({count = 80, depth = 65, z}){//définir 
             Blabla insérer ici références au Seigneur des Anneaux Aragorn tout ça tout ça.
         </p>
       </div>
-      <Canvas className={"canvas"} camera={{near: 0.01, far: 100, fov: 24}} dpr={1}>
+      <Canvas className={"canvas"} camera={{near: 0.01, far: 100, fov: 24}} dpr={1}>{//on définit le point de vue la profondeur et tout
+      }
         <Suspense fallback={null}>
-        <color attach={"background"} args={["#89633c"]}/>
+        <color attach={"background"} args={["#89633c"]}/>{//on définit que le background sera doré
+        }
             <ambientLight intensity={0.5}/>
         {Array.from({length: count}, (_,i) => (
             <Model key={i} z={-i / count * depth}/>//répartir les anneaux dans l'espace en profondeur
         ))}
-        <Environment preset={"forest"} blur={1}/>
+        <Environment preset={"forest"} blur={1}/>{//rendre l'anneau doré en mode ça reflète une forêt tout ça tout ça, par exemple si on met warehouse ça reflète un parking
+        }
         <EffectComposer>
             <DepthOfField target={[0, 0, depth / 2]} focalLength={0.4} bokehScale={12} height={800}/>
         </EffectComposer>
         </Suspense>
-      </Canvas>{//^rendre l'anneau doré en mode ça reflète une forêt tout ça tout ça, par exemple si on met warehouse ça reflète un parking
-      //^on définit également que le background sera doré
-}
+      </Canvas>
       </>
   )
 }
